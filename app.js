@@ -284,7 +284,7 @@ function updateSaveHint() {
   const changed = document.querySelectorAll('#editForm .field.changed').length;
   const hint = document.getElementById('saveHint');
   hint.textContent = changed > 0
-    ? 'มีการแก้ไข ' + changed + ' รายการ (ไฮไลต์สีเหลือง) — ระบบจะบันทึกทับข้อมูลเดิมและเก็บประวัติอัตโนมัติ'
+    ? 'มีการแก้ไข ' + changed + ' รายการ — ระบบจะบันทึกทับข้อมูลเดิมและเก็บประวัติอัตโนมัติ'
     : '';
 }
 
