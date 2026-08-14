@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ระบบตรวจสอบข้อมูลบุคลากร</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ---------- หน้าจอเข้าสู่ระบบ ---------- -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="brand-icon">📋</div>
+      <h1>ระบบตรวจสอบข้อมูลบุคลากร</h1>
+      <p class="subtitle">กรุณากรอกเบอร์โทรศัพท์ของท่านเพื่อระบุตัวตนก่อนตรวจสอบ/แก้ไขข้อมูล</p>
+      <form id="phoneForm" class="phone-form">
+        <input
+          type="tel"
+          id="phoneInput"
+          class="phone-input"
+          placeholder="เช่น 0812345678"
+          inputmode="numeric"
+          maxlength="10"
+          autocomplete="tel">
+        <button type="submit" class="btn-primary btn-phone-submit">เข้าใช้งาน</button>
+      </form>
+      <p class="login-note" id="loginNote"></p>
+    </div>
+  </div>
+
+  <!-- ---------- แอปหลัก ---------- -->
+  <div class="app hidden" id="app">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">📋</div>
+        <div>
+          <h1>ระบบตรวจสอบข้อมูลบุคลากร</h1>
+          <p class="subtitle">ตรวจสอบ แก้ไข และบันทึกประวัติการเปลี่ยนแปลงข้อมูล</p>
+        </div>
+      </div>
+      <div class="user-badge" id="userBadge">
+        <span class="phone-icon">📱</span>
+        <span id="userPhone">-</span>
+        <button class="btn-signout" id="btnSignOut">เปลี่ยนเบอร์โทร</button>
+      </div>
+    </header>
+
+    <nav class="steps" id="stepsNav">
+      <div class="step active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">เลือกกลุ่มสาระฯ/ฝ่ายงาน</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">เลือกรายชื่อบุคลากร</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">ตรวจสอบ / แก้ไขข้อมูล</span>
+      </div>
+    </nav>
+
+    <main class="content">
+
+      <!-- STEP 1 -->
+      <section class="panel" id="panel-1">
+        <div class="panel-head">
+          <h2>เลือกกลุ่มสาระฯ/ฝ่ายงาน</h2>
+          <div class="search-box">
+            <input type="text" id="groupSearch" placeholder="ค้นหากลุ่มสาระฯ/ฝ่ายงาน...">
+          </div>
+        </div>
+        <div class="grid" id="groupGrid">
+          <div class="skeleton-row"></div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="panel hidden" id="panel-2">
+        <div class="panel-head">
+          <button class="btn-back" data-back="1">← ย้อนกลับ</button>
+          <h2 id="selectedGroupTitle">เลือกรายชื่อ</h2>
+          <div class="search-box">
+            <input type="text" id="itemSearch" placeholder="ค้นหาชื่อ หรือ ลำดับ...">
+          </div>
+        </div>
+        <div class="list" id="itemList"></div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="panel hidden" id="panel-3">
+        <div class="panel-head">
+          <button class="btn-back" data-back="2">← ย้อนกลับ</button>
+          <h2>ตรวจสอบ / แก้ไขข้อมูล</h2>
+          <button class="btn-secondary" id="btnHistory">🕘 ดูประวัติการแก้ไข</button>
+        </div>
+        <div class="record-card">
+          <div class="record-summary" id="recordSummary"></div>
+          <form id="editForm" class="edit-form"></form>
+          <div class="action-bar">
+            <span class="save-hint" id="saveHint"></span>
+            <div class="action-buttons">
+              <button type="button" class="btn-outline" id="btnReset">ยกเลิกการแก้ไข</button>
+              <button type="button" class="btn-primary" id="btnSave">บันทึกทับข้อมูล</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-overlay hidden" id="historyModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>ประวัติการแก้ไข</h3>
+        <button class="btn-close" id="closeHistory">✕</button>
+      </div>
+      <div class="modal-body" id="historyBody">
+        <p class="empty-state">กำลังโหลดข้อมูล...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
